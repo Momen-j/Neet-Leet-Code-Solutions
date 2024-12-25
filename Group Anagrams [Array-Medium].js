@@ -39,3 +39,42 @@ class Solution {
 
 // TC: O(m * n) where m is the number of strings given and n is the average length of each string
 // SC: O(m) where m is the number of strings given since we use a hashmap
+
+
+// OLD SOLUTION
+// TC: O(m * nlogn)  where m is the number of strings given and n is the average length of each string
+// SC: O(m) where m is the number of strings given since we use a hashmap
+class Solution {
+  /**
+   * @param {string[]} strs
+   * @return {string[][]}
+   */
+  groupAnagrams(strs) {
+    // for every element in array, use sort helper function then check if it exists as a key in hashmap
+    // if so, then add the element into the value array for the key and if not, create a new key and add the element in
+    // return array of values after
+    let anagramMap = new Map();
+
+    let sortString = (stringg) => {
+      /*if (stringg === "") {
+                return ""
+            }*/
+
+      return stringg.split("").sort().join("");
+    };
+
+    for (let i = 0; i < strs.length; i++) {
+      let ogStr = strs[i];
+      //console.log(ogStr)
+      let sortedStr = sortString(ogStr);
+      //console.log(sortedStr)
+      if (anagramMap.has(sortedStr)) {
+        anagramMap.get(sortedStr).push(ogStr);
+      } else {
+        anagramMap.set(sortedStr, [ogStr]);
+      }
+    }
+    console.log(anagramMap);
+    return [...anagramMap.values()];
+  }
+}
