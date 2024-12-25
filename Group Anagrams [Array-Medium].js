@@ -14,11 +14,10 @@ class Solution {
     for (let s of strs) {
       const count = new Array(26).fill(0); // covers lower case a - z
       for (let c of s) {
-        // allows us to access a
-        // certain element within the count array corresponding to a letter
-        // a.charCodeAt(0) - a.charCodeAt(0) = 0
-        // z.charCodeAt(0) - a.charCodeAt(0) = 25
-        // covers all of the indicies of the array and can easily update thru loop
+        // allows us to access a certain element within the count array corresponding to a letter
+        // a.charCodeAt(0) - a.charCodeAt(0) = Index 0
+        // z.charCodeAt(0) - a.charCodeAt(0) = Index 25
+        // covers all of the indicies of the array representing the alphabet and can easily update thru loop
         count[c.charCodeAt(0) - "a".charCodeAt(0)] += 1;
       }
 
