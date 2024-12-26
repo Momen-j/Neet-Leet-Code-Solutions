@@ -52,3 +52,39 @@ class Solution {
 
 // TC: O(n) where n is the size of nums
 // SC: O(n) where n is the size of nums
+
+/////
+
+// HEAP SOLUTION
+class Solution {
+  /**
+   * @param {number[]} nums
+   * @param {number} k
+   * @return {number[]}
+   */
+  topKFrequent(nums, k) {
+    const count = new Map();
+    for (const num of nums) {
+      count.set(num, (count.get(num) || 0) + 1);
+    }
+
+    const heap = new MinPriorityQueue((x) => x[1]);
+    for (const [num, cnt] of count.entries()) {
+      heap.enqueue([num, cnt]);
+      if (heap.size() > k) {
+        console.log(heap.toArray());
+        heap.dequeue();
+      }
+    }
+
+    const res = [];
+    for (let i = 0; i < k; i++) {
+      const [num, cnt] = heap.dequeue();
+      res.push(num);
+    }
+    return res;
+  }
+}
+
+// TC: O(nlogk) where n is the length of the array and k is the number of top frequent elements.
+// SC: O(n+k) where n is the length of the array and k is the number of top frequent elements.
